@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1443867925 source:c:\users\guill\desktop\projet c++\projet\main.cpp
+	<SFML/Graphics.hpp>
+	<SFML/Window.hpp>
+	<SFML/System.hpp>
+
