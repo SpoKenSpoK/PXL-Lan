@@ -5,8 +5,6 @@
 
 #include "perso.hpp"
 
-
-
 sf::Texture player_texture;
 
 int main(){
