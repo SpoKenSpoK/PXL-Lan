@@ -3,8 +3,11 @@
 #include <SFML/System.hpp>
 #include <iostream>
 
+//INCLUDE:
 #include "perso.hpp"
+#include "gamescore.hpp"
 
+//DEBUT DU MAIN
 sf::Texture player_texture;
 
 int main(){
@@ -20,7 +23,7 @@ int main(){
 
     while (window.isOpen())
     {
-        bool slide = false;
+        bool slide = false; /// ! GESTION DU CLAVIER A METTRE DANS UNE CLASSE MOUVEMENT (par exemple)
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::G)){
             jump=true;
             slide=false;
@@ -56,8 +59,21 @@ int main(){
                 window.close();
         }
 
+        ///!!!! TEST THREAD !!!!///
+
+        GameScore object;
+        sf::Thread thread(&GameScore::func, &object);
+        thread.launch();
+
+        player2.setPosition(window.getSize().x/2,window.getSize().y - 64);
+
+        ///!!!! FIN TEST THREAD !!!!///
+
         window.clear();
         window.draw(player);
+
+        window.draw(player2);
+
         window.display();
     }
 
