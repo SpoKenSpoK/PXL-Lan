@@ -3,27 +3,11 @@
 #include <SFML/System.hpp>
 #include <iostream>
 
+#include "perso.hpp"
+
 
 
 sf::Texture player_texture;
-
-class Player : public sf::Sprite{
-private:
-
-
-public:
-    int speed;
-    Status status;
-    Player();
-    //const int getSpeed();
-    //void setSpeed(const int);
-    //const Status getStatus();
-    //void setStatus(const Status);
-};
-
-Player::Player()
-    :speed(1), status(running)
-{}
 
 int main(){
     sf::RenderWindow window(sf::VideoMode(700,200), "Project");

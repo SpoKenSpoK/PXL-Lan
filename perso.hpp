@@ -16,9 +16,8 @@ public:
     // GETTER & SETTER:
     int getSpeed() const;
     void setSpeed(const int&);
-    Status getStatus();
+    Status getStatus() const;
     setStatus(const Status&);
-
 };
 
 #endif // PLAYER_HPP
