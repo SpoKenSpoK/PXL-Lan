@@ -3,7 +3,7 @@
 #include <SFML/System.hpp>
 #include <iostream>
 
-enum Status{jumping, running, sliding};
+
 
 sf::Texture player_texture;
 

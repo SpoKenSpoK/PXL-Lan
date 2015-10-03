@@ -1,6 +1,8 @@
 #ifndef PLAYER_HPP
 #define PLAYER_HPP
 
+enum Status{jumping, running, sliding}; //ENUMERATION UTILISEE DANS LA CLASSE PLAYER
+
 class Player: public sf::Sprite{
 private:
     int speed; //Vitesse du personnage
@@ -20,9 +22,3 @@ public:
 };
 
 #endif // PLAYER_HPP
-
-
-Player::Player()
-    :speed(1), status(running)
-{}
-
