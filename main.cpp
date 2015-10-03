@@ -8,7 +8,7 @@
 sf::Texture player_texture;
 
 int main(){
-    sf::RenderWindow window(sf::VideoMode(1600,400), "Project");
+    sf::RenderWindow window(sf::VideoMode(1200,500), "Project");
     window.setFramerateLimit(120);
 
     player_texture.loadFromFile("bin/img/sprite.png");
