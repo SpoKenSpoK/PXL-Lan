@@ -12,7 +12,6 @@ int GameScore::Calcul_Score() //=> Calcul le score qu'effectue le joueur
 ///! TEST
 void GameScore::func()
 {
-    for(int i=0; i<10;++i)
         std::cerr<<"LoL"<<std::endl;
 }
 

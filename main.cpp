@@ -66,9 +66,6 @@ int main(){
         sf::Thread thread(&GameScore::func, &object);
         thread.launch();
 
-
-        thread.wait();
-
         ///!!!! FIN TEST THREAD !!!!///
 
         window.clear();
