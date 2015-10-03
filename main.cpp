@@ -26,13 +26,13 @@ Player::Player()
 {}
 
 int main(){
-    sf::RenderWindow window(sf::VideoMode(900,600), "Project");
+    sf::RenderWindow window(sf::VideoMode(700,200), "Project");
     window.setFramerateLimit(120);
 
     player_texture.loadFromFile("bin/img/sprite.png");
     Player player;
     player.setTexture(player_texture);
-    player.setPosition(0,window.getSize().y - 64);
+    player.setPosition(window.getSize().x/2 - 32,window.getSize().y - 64);
 
     bool jump = false;
 
@@ -48,16 +48,20 @@ int main(){
             jump=false;
         }
 
-        if(jump==true){
+        if(jump==true && player.getPosition().y > window.getSize().y - 150){
             player.status = jumping;
             slide=false;
-            player.move(0,-1);
+            player.move(0,-5);
+        }
+        else if(player.getPosition().y < window.getSize().y - 64){
+            player.move(0,7);
         }
         if(slide==true){
             player.status = sliding;
             jump=false;
             player.setPosition(player.getPosition().x, window.getSize().y - 64);
             std::cout<<"sliding"<<std::endl;
+            //mettre l'animation
         }
         if(!jump && !slide) player.status = running;
 
