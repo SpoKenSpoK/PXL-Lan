@@ -37,6 +37,7 @@ int main(){
             player.setStatus(jumping);
             slide=false;
             player.move(0,-5);
+            std::cout<<"Jumping"<<std::endl;
         }
         else if(player.getPosition().y < window.getSize().y - 64){
             player.move(0,7);
@@ -65,15 +66,13 @@ int main(){
         sf::Thread thread(&GameScore::func, &object);
         thread.launch();
 
-        player2.setPosition(window.getSize().x/2,window.getSize().y - 64);
+
+        thread.wait();
 
         ///!!!! FIN TEST THREAD !!!!///
 
         window.clear();
         window.draw(player);
-
-        window.draw(player2);
-
         window.display();
     }
 

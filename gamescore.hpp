@@ -1,9 +1,7 @@
 #ifndef GAMESCORE_HPP
 #define GAMESCORE_HPP
 
-#include "perso.hpp"
-
-class GameScore: public Player{
+class GameScore{
 public:
     //CONSTRUCTEUR & DESTRUCTEUR
     GameScore();
@@ -11,7 +9,7 @@ public:
 
     //FONCTION A APPELER DANS LE THREAD
     int Calcul_Score();
-    Player func(); // => Fonction de test
+    void func(); // => Fonction de test
 
     /// Une fonction qui peut afficher le score en même temps que l'on joue
     /// Afficher le lvl

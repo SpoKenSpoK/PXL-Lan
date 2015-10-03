@@ -1,3 +1,4 @@
+#include <iostream>
 #include "gamescore.hpp"
 
 //CONSTRUCTEUR & DESTRUCTEUR
@@ -9,15 +10,10 @@ int GameScore::Calcul_Score() //=> Calcul le score qu'effectue le joueur
 { return 0; }
 
 ///! TEST
-Player GameScore::func()
+void GameScore::func()
 {
-    sf::Texture p;
-    p.loadFromFile("bin/img/sprite.png");
-    Player player2;
-    player2.setTexture(p);
-
-
-    return player2;
+    for(int i=0; i<10;++i)
+        std::cerr<<"LoL"<<std::endl;
 }
 
 
