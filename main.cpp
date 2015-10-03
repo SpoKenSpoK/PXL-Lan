@@ -55,6 +55,7 @@ int main(){
         }
         else if(player.getPosition().y < window.getSize().y - 64){
             player.move(0,7);
+            jump=false;
         }
         if(slide==true){
             player.status = sliding;
