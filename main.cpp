@@ -33,7 +33,7 @@ int main(){
         }
 
         if(jump==true && player.getPosition().y > window.getSize().y - 150){
-            player.status = jumping;
+            player.setStatus(jumping);
             slide=false;
             player.move(0,-5);
         }
@@ -42,13 +42,13 @@ int main(){
             jump=false;
         }
         if(slide==true){
-            player.status = sliding;
+            player.setStatus(jumping);
             jump=false;
             player.setPosition(player.getPosition().x, window.getSize().y - 64);
             std::cout<<"sliding"<<std::endl;
             //mettre l'animation
         }
-        if(!jump && !slide) player.status = running;
+        if(!jump && !slide) player.setStatus(running);
 
 
         sf::Event event;

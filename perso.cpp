@@ -7,11 +7,11 @@ Player::Player()
 
 Player::~Player(){}
 
-//GETTER & SETTEUR:
+//GETTER & SETTER:
 int Player::getSpeed() const { return speed; }
 void Player::setSpeed(const int& _speed) { speed=_speed; }
-Status getStatus() { return Status; }
-setStatus(const Status& _status) { status=_status; }
+Status getStatus() { return status; }
+void Player::setStatus(const Status& _status) { status=_status; }
 
 
 
