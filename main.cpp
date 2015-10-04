@@ -40,8 +40,6 @@ int main(){
     {
 
         if(!game_started){
-
-
             window.clear();
             hud.start_bg(window);
             window.display();
