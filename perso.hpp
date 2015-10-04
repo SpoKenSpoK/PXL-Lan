@@ -1,6 +1,7 @@
 #ifndef PLAYER_HPP
 #define PLAYER_HPP
 
+#include <iostream>
 #include <SFML/Graphics.hpp>
 
 enum Status{jumping, running, sliding}; //ENUMERATION UTILISEE DANS LA CLASSE PLAYER
@@ -20,6 +21,8 @@ public:
     void setSpeed(const int&);
     Status getStatus() const;
     void setStatus(const Status&);
+    void jump();
+    void slide();
 };
 
 #endif // PLAYER_HPP

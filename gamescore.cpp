@@ -12,7 +12,7 @@ int GameScore::Calcul_Score() //=> Calcul le score qu'effectue le joueur
 ///! TEST
 void GameScore::func()
 {
-        std::cerr<<"LoL"<<std::endl;
+        std::cerr<<"Thread"<<std::endl;
 }
 
 

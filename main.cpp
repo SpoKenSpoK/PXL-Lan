@@ -17,40 +17,58 @@ int main(){
     player_texture.loadFromFile("bin/img/sprite.png");
     Player player;
     player.setTexture(player_texture);
-    player.setPosition(window.getSize().x/2 - 32,window.getSize().y - 64);
+    player.setPosition(window.getSize().x/2 - 32,window.getSize().y - 72);
 
-    bool jump = false;
+
 
     while (window.isOpen())
     {
+
+        bool jump = false;
         bool slide = false; /// ! GESTION DU CLAVIER A METTRE DANS UNE CLASSE MOUVEMENT (par exemple)
+
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::G)){
             jump=true;
             slide=false;
+
+            player.jump();
         }
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::H)){
             slide=true;
             jump=false;
+
+            player.slide();
         }
 
         if(jump==true && player.getPosition().y > window.getSize().y - 150){
-            player.setStatus(jumping);
             slide=false;
-            player.move(0,-5);
-            std::cout<<"Jumping"<<std::endl;
         }
         else if(player.getPosition().y < window.getSize().y - 64){
-            player.move(0,7);
+            player.move(0,5);
             jump=false;
-        }
-        if(slide==true){
-            player.setStatus(jumping);
-            jump=false;
-            player.setPosition(player.getPosition().x, window.getSize().y - 64);
-            std::cout<<"sliding"<<std::endl;
-            //mettre l'animation
         }
         if(!jump && !slide) player.setStatus(running);
+
+
+
+        ///! CHANTIER !///////////////
+
+ /*
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::G)){
+                while(player.getPosition().y > window.getSize().y - 150)
+                    player.jump();
+        }
+
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::H)){
+                while(player.getPosition().y < window.getSize().y - 64)
+                    player.slide();
+        }
+
+        else if ( (player.getPosition().y > window.getSize().y - 150) && (player.getPosition().y < window.getSize().y - 64))
+            player.move(0,5);
+*/
+
+        ///! FIN CHANTIER !!///////
 
 
         sf::Event event;
