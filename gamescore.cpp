@@ -14,9 +14,6 @@ int GameScore::getCompt_i() const { return compt_i; }
 void GameScore::setCompt_i(const int& i) { compt_i=i; }
 
 //FONCTION A APPELER DANS LE THREAD
-int GameScore::Calcul_Score() //=> Calcul le score qu'effectue le joueur
-{ return 0; }
-
 int GameScore::func(bool& game_started)
 {
     if(game_started){

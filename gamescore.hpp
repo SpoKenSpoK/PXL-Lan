@@ -13,7 +13,6 @@ public:
     ~GameScore();
 
     //FONCTION A APPELER DANS LE THREAD
-    int Calcul_Score();
     int func(bool&); // => Fonction de test
 
     //GETTER & SETTER:
