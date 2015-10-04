@@ -31,7 +31,11 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="gamescore.cpp" />
+		<Unit filename="gamescore.hpp" />
 		<Unit filename="main.cpp" />
+		<Unit filename="perso.cpp" />
+		<Unit filename="perso.hpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />

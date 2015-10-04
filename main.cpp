@@ -10,6 +10,10 @@
 //DEBUT DU MAIN
 sf::Texture player_texture;
 
+float compt_f = 0; ///compteurs de score
+int compt_i = 0;
+bool game_started=false; ///booleen a vrai tant que le mec a pas perdu
+
 int main(){
     sf::RenderWindow window(sf::VideoMode(1200,500), "Project");
     window.setFramerateLimit(120);
@@ -21,6 +25,13 @@ int main(){
 
     while (window.isOpen())
     {
+        game_started=true; ///mettre a true quand le jeu commence
+        if(game_started){
+            compt_f+=0.1;
+            compt_i=compt_f;
+            std::cout<<compt_i<<std::endl;
+        }
+
         bool jump = false;
         bool slide = false;
 
