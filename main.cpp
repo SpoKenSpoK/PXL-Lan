@@ -48,6 +48,7 @@ int main(){
             }
             if(sf::Keyboard::isKeyPressed(sf::Keyboard::G) || sf::Keyboard::isKeyPressed(sf::Keyboard::H)) game_started = true;
         }
+
         if(game_started){
             bool jump = false;
             bool slide = false;

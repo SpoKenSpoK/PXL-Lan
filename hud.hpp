@@ -9,13 +9,7 @@ private:
 
 
 public:
-    sf::Texture start1;
-    sf::Texture start2;
-    sf::Texture g_over;
-
-    sf::Sprite s_start1;
-    sf::Sprite s_start2;
-    sf::Sprite s_g_over;
+    sf::Image starter;
     //CONSTRUCTEUR & DESTRUCTEUR
     Hud();
     ~Hud();
