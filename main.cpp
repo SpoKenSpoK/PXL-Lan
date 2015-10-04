@@ -7,6 +7,7 @@
 //INCLUDE:
 #include "perso.hpp"
 #include "gamescore.hpp"
+#include "hud.hpp"
 
 //AVANT LE MAIN
 std::string intToString(int i) {
@@ -33,11 +34,17 @@ int main(){
     player.setPosition(window.getSize().x/2 - 32,window.getSize().y - 64);
 
     GameScore gamescore;
-
+    Hud hud;
 
     while (window.isOpen())
     {
+<<<<<<< 751c40afd103bd3f75852ddd12a8e415a64394e5
         if(!game_started){
+=======
+        while(sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+            hud.start_bg(window);
+
+>>>>>>> 03fdc8f04aa8c0f7ed551af1e8a5f17329a2a5f7
 
             if(sf::Keyboard::isKeyPressed(sf::Keyboard::G) || sf::Keyboard::isKeyPressed(sf::Keyboard::H)) game_started = true;
         }
@@ -90,7 +97,35 @@ int main(){
             score.setString(temp);
         }
 
+<<<<<<< 751c40afd103bd3f75852ddd12a8e415a64394e5
         ///!!!! FIN TEST THREAD !!!!///
+=======
+        else if(player.getPosition().y < window.getSize().y - 64){
+            player.move(0,5);
+            jump=false;
+        }
+
+        if(slide==true){
+            jump=false;
+            player.setPosition(player.getPosition().x, window.getSize().y - 64);
+            std::cout<<"sliding"<<std::endl;
+        }
+
+        if(!jump && !slide) player.setStatus(running);
+
+        sf::Event event;
+        while (window.pollEvent(event))
+        {
+            if (event.type == sf::Event::Closed)
+                window.close();
+        }
+
+        game_started=true; ///mettre a true quand le jeu commence
+        std::string temp = "Score: ";
+        temp += intToString(gamescore.func(game_started));
+        score.setString(temp);
+
+>>>>>>> 03fdc8f04aa8c0f7ed551af1e8a5f17329a2a5f7
         window.clear();
         window.draw(player);
         window.draw(score);
