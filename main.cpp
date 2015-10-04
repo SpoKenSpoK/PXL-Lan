@@ -37,53 +37,58 @@ int main(){
 
     while (window.isOpen())
     {
+        if(!game_started){
 
-        bool jump = false;
-        bool slide = false;
-
-        ///GESTION DU CLAVIER & MOUVEMENT DU PERSO
-
-        if(sf::Keyboard::isKeyPressed(sf::Keyboard::G)){
-            jump=true;
-            slide=false;
-            player.jump();
+            if(sf::Keyboard::isKeyPressed(sf::Keyboard::G) || sf::Keyboard::isKeyPressed(sf::Keyboard::H)) game_started = true;
         }
-        if(sf::Keyboard::isKeyPressed(sf::Keyboard::H)){
-            slide=true;
-            jump=false;
-            player.slide();
+        if(game_started){
+            bool jump = false;
+            bool slide = false;
+
+            ///GESTION DU CLAVIER & MOUVEMENT DU PERSO
+
+            if(sf::Keyboard::isKeyPressed(sf::Keyboard::G)){
+                jump=true;
+                slide=false;
+                player.jump();
+            }
+            if(sf::Keyboard::isKeyPressed(sf::Keyboard::H)){
+                slide=true;
+                jump=false;
+                player.slide();
+            }
+
+            if(jump==true && player.getPosition().y > window.getSize().y - 150){
+                slide=false;
+            }
+
+            else if(player.getPosition().y < window.getSize().y - 64){
+                player.move(0,5);
+                jump=false;
+            }
+
+            if(slide==true){
+                jump=false;
+                player.setPosition(player.getPosition().x, window.getSize().y - 64);
+                std::cout<<"sliding"<<std::endl;
+            }
+
+            if(!jump && !slide) player.setStatus(running);
+
+            sf::Event event;
+            while (window.pollEvent(event))
+            {
+                if (event.type == sf::Event::Closed)
+                    window.close();
+            }
+
+            ///!!!! TEST THREAD !!!!///
+
+            game_started=true; ///mettre a true quand le jeu commence
+            std::string temp = "Score: ";
+            temp += intToString(gamescore.func(game_started));
+            score.setString(temp);
         }
-
-        if(jump==true && player.getPosition().y > window.getSize().y - 150){
-            slide=false;
-        }
-
-        else if(player.getPosition().y < window.getSize().y - 64){
-            player.move(0,5);
-            jump=false;
-        }
-
-        if(slide==true){
-            jump=false;
-            player.setPosition(player.getPosition().x, window.getSize().y - 64);
-            std::cout<<"sliding"<<std::endl;
-        }
-
-        if(!jump && !slide) player.setStatus(running);
-
-        sf::Event event;
-        while (window.pollEvent(event))
-        {
-            if (event.type == sf::Event::Closed)
-                window.close();
-        }
-
-        ///!!!! TEST THREAD !!!!///
-
-        game_started=true; ///mettre a true quand le jeu commence
-        std::string temp = "Score: ";
-        temp += intToString(gamescore.func(game_started));
-        score.setString(temp);
 
         ///!!!! FIN TEST THREAD !!!!///
         window.clear();
