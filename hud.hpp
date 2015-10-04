@@ -9,7 +9,8 @@ private:
 
 
 public:
-    sf::Image starter;
+    sf::Texture starter;
+    sf::Sprite s_starter;
     //CONSTRUCTEUR & DESTRUCTEUR
     Hud();
     ~Hud();

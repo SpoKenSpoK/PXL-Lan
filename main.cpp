@@ -40,6 +40,9 @@ int main(){
     {
 
         if(!game_started){
+
+            hud.start_bg(window);
+
             sf::Event event;
             while (window.pollEvent(event))
             {
