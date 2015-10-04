@@ -40,11 +40,14 @@ int main(){
     {
 
         if(!game_started){
-
+            sf::Event event;
+            while (window.pollEvent(event))
+            {
+                if (event.type == sf::Event::Closed)
+                    window.close();
+            }
             if(sf::Keyboard::isKeyPressed(sf::Keyboard::G) || sf::Keyboard::isKeyPressed(sf::Keyboard::H)) game_started = true;
         }
-
-
         if(game_started){
             bool jump = false;
             bool slide = false;
