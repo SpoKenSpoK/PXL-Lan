@@ -41,7 +41,10 @@ int main(){
 
         if(!game_started){
 
+
+            window.clear();
             hud.start_bg(window);
+            window.display();
 
             sf::Event event;
             while (window.pollEvent(event))
@@ -97,12 +100,12 @@ int main(){
             std::string temp = "Score: ";
             temp += intToString(gamescore.func(game_started));
             score.setString(temp);
-        }
 
-        window.clear();
-        window.draw(player);
-        window.draw(score);
-        window.display();
+            window.clear();
+            window.draw(player);
+            window.draw(score);
+            window.display();
+        }
     }
 
 return 0;
