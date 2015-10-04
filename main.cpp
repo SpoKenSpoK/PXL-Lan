@@ -17,15 +17,14 @@ int main(){
     player_texture.loadFromFile("bin/img/sprite.png");
     Player player;
     player.setTexture(player_texture);
-    player.setPosition(window.getSize().x/2 - 32,window.getSize().y - 72);
-
-
+    player.setPosition(window.getSize().x/2 - 32,window.getSize().y - 64);
 
     while (window.isOpen())
     {
-
         bool jump = false;
-        bool slide = false; /// ! GESTION DU CLAVIER A METTRE DANS UNE CLASSE MOUVEMENT (par exemple)
+        bool slide = false;
+
+        ///GESTION DU CLAVIER & MOUVEMENT DU PERSO
 
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::G)){
             jump=true;
@@ -47,6 +46,13 @@ int main(){
             player.move(0,5);
             jump=false;
         }
+
+        if(slide==true){
+            jump=false;
+            player.setPosition(player.getPosition().x, window.getSize().y - 64);
+            std::cout<<"sliding"<<std::endl;
+        }
+
         if(!jump && !slide) player.setStatus(running);
 
 
