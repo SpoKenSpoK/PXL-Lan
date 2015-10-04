@@ -2,19 +2,28 @@
 #include <SFML/Window.hpp>
 #include <SFML/System.hpp>
 #include <iostream>
+#include <sstream>
 
 //INCLUDE:
 #include "perso.hpp"
 #include "gamescore.hpp"
 
+//AVANT LE MAIN
+std::string intToString(int i) {
+     std::ostringstream oss;
+     oss << i;
+     return oss.str();
+}
+
 //DEBUT DU MAIN
 sf::Texture player_texture;
+sf::Font fontScore;
+sf::Text score("", fontScore);
 
-float compt_f = 0; ///compteurs de score
-int compt_i = 0;
 bool game_started=false; ///booleen a vrai tant que le mec a pas perdu
 
 int main(){
+    fontScore.loadFromFile("arial.ttf");
     sf::RenderWindow window(sf::VideoMode(1200,500), "Project");
     window.setFramerateLimit(120);
 
@@ -23,14 +32,11 @@ int main(){
     player.setTexture(player_texture);
     player.setPosition(window.getSize().x/2 - 32,window.getSize().y - 64);
 
+    GameScore gamescore;
+
+
     while (window.isOpen())
     {
-        game_started=true; ///mettre a true quand le jeu commence
-        if(game_started){
-            compt_f+=0.1;
-            compt_i=compt_f;
-            std::cout<<compt_i<<std::endl;
-        }
 
         bool jump = false;
         bool slide = false;
@@ -40,19 +46,18 @@ int main(){
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::G)){
             jump=true;
             slide=false;
-
             player.jump();
         }
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::H)){
             slide=true;
             jump=false;
-
             player.slide();
         }
 
         if(jump==true && player.getPosition().y > window.getSize().y - 150){
             slide=false;
         }
+
         else if(player.getPosition().y < window.getSize().y - 64){
             player.move(0,5);
             jump=false;
@@ -66,28 +71,6 @@ int main(){
 
         if(!jump && !slide) player.setStatus(running);
 
-
-
-        ///! CHANTIER !///////////////
-
- /*
-        if(sf::Keyboard::isKeyPressed(sf::Keyboard::G)){
-                while(player.getPosition().y > window.getSize().y - 150)
-                    player.jump();
-        }
-
-        if(sf::Keyboard::isKeyPressed(sf::Keyboard::H)){
-                while(player.getPosition().y < window.getSize().y - 64)
-                    player.slide();
-        }
-
-        else if ( (player.getPosition().y > window.getSize().y - 150) && (player.getPosition().y < window.getSize().y - 64))
-            player.move(0,5);
-*/
-
-        ///! FIN CHANTIER !!///////
-
-
         sf::Event event;
         while (window.pollEvent(event))
         {
@@ -97,14 +80,15 @@ int main(){
 
         ///!!!! TEST THREAD !!!!///
 
-        GameScore object;
-        sf::Thread thread(&GameScore::func, &object);
-        thread.launch();
+        game_started=true; ///mettre a true quand le jeu commence
+        std::string temp = "Score: ";
+        temp += intToString(gamescore.func(game_started));
+        score.setString(temp);
 
         ///!!!! FIN TEST THREAD !!!!///
-
         window.clear();
         window.draw(player);
+        window.draw(score);
         window.display();
     }
 
