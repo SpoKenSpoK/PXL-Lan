@@ -5,6 +5,9 @@ Hud::Hud()
     starter.loadFromFile("tt.png");
     s_starter.setTexture(starter);
 
+    over.loadFromFile("tt_end.png");
+    s_over.setTexture(over);
+
     fontText.loadFromFile("Agency FB Bold.ttf");
     highscore.setFont(fontText);
     highscore.setString("- 5 MEILLEURS SCORES -");
@@ -12,7 +15,6 @@ Hud::Hud()
 
     consigne.setFont(fontText);
     consigne.setString("G pour sauter.\nH pour s'accroupir.\n\nCourrer pour échapper\naux taureaux !\n\nAppuyez sur G pour\ncommencer la partie.\n\nBonne chance !");
-
 
     for(int i=0; i<5; ++i) { tabname[i].setFont(fontText); }
     int tmp=42;
@@ -67,8 +69,17 @@ void Hud::start_bg(sf::RenderWindow& w){
     for(int i=0; i<5; ++i){ w.draw(tabname[i]); }
 }
 
-void Hud::gameover_bg(sf::RenderWindow& w){
-   // w.draw(s_g_over);
+bool Hud::gameover_bg(sf::RenderWindow& w){
+    //GESTION ECRITURE DANS LE FICHIER
+
+    bool name_right = false;
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Return))
+        name_right = false;
+    else
+        name_right = true;
+
+    w.draw(s_over);
+    return name_right;
 }
 
 std::string Hud::intToString(int i){

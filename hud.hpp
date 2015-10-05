@@ -10,6 +10,8 @@ class Hud: public sf::Sprite{
 private:
     sf::Texture starter;
     sf::Sprite s_starter;
+    sf::Texture over;
+    sf::Sprite s_over;
     sf::Font fontText;
     sf::Text highscore;
     sf::Text consigne;
@@ -22,7 +24,7 @@ public:
 
     //APPEL DES DIFFERENTS BACKGROUND
     void start_bg(sf::RenderWindow&);
-    void gameover_bg(sf::RenderWindow&);
+    bool gameover_bg(sf::RenderWindow&);
     std::string intToString(int);
 };
 

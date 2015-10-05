@@ -38,7 +38,6 @@ int main(){
 
     while (window.isOpen())
     {
-
         if(!game_started){
             window.clear();
             hud.start_bg(window);
@@ -50,14 +49,29 @@ int main(){
                 if (event.type == sf::Event::Closed)
                     window.close();
             }
-            if(sf::Keyboard::isKeyPressed(sf::Keyboard::G) || sf::Keyboard::isKeyPressed(sf::Keyboard::H)) game_started = true;
+            if(sf::Keyboard::isKeyPressed(sf::Keyboard::G)) game_started = true;
         }
 
         if(game_started){
             bool jump = false;
             bool slide = false;
+            bool dead = false;
 
             ///GESTION DU CLAVIER & MOUVEMENT DU PERSO
+
+            if(sf::Keyboard::isKeyPressed(sf::Keyboard::X)) dead=true;
+
+            if(dead){
+                bool death_bg = true;
+                while(death_bg){
+                    game_started = false;
+                    window.clear();
+                    death_bg=hud.gameover_bg(window);
+                    window.display();
+                }
+                gamescore.setCompt_f(0);
+                dead=false;
+            }
 
             if(sf::Keyboard::isKeyPressed(sf::Keyboard::G)){
                 jump=true;
@@ -94,7 +108,6 @@ int main(){
                     window.close();
             }
 
-            game_started=true; ///mettre a true quand le jeu commence
             std::string temp = "Score: ";
             temp += intToString(gamescore.func(game_started));
             score.setString(temp);
