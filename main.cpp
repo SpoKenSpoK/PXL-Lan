@@ -24,8 +24,8 @@ sf::Text score("", fontScore);
 bool game_started=false; ///booleen a vrai tant que le mec a pas perdu
 
 int main(){
-    fontScore.loadFromFile("arial.ttf");
-    sf::RenderWindow window(sf::VideoMode(1200,500), "Project");
+    fontScore.loadFromFile("Agency FB Bold.ttf");
+    sf::RenderWindow window(sf::VideoMode(1200,500), "PXL-Lan PROJECT - 2015");
     window.setFramerateLimit(120);
 
     player_texture.loadFromFile("bin/img/sprite.png");

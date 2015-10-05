@@ -5,9 +5,10 @@ Hud::Hud()
     starter.loadFromFile("tt.png");
     s_starter.setTexture(starter);
 
-    fontText.loadFromFile("arial.ttf");
+    fontText.loadFromFile("Agency FB Bold.ttf");
     highscore.setFont(fontText);
     highscore.setString("Meilleurs Scores : ");
+    highscore.setCharacterSize(50);
 
     for(int i=0; i<5; ++i) { tabname[i].setFont(fontText); }
     tabname[0].setColor(sf::Color::Yellow);
@@ -18,9 +19,9 @@ Hud::~Hud() {}
 void Hud::start_bg(sf::RenderWindow& w){
     s_starter.setPosition(w.getSize().x/2 - starter.getSize().x/2,w.getSize().y/2 - starter.getSize().y/2);
 
-    highscore.setPosition(w.getSize().x - 1150,w.getSize().y - 500);
+    highscore.setPosition(w.getSize().x - 1150,w.getSize().y - 470);
 
-    int tmp=500;
+    int tmp=450;
     for(int i=0; i<5; i++)
     {
         tmp-=50;
