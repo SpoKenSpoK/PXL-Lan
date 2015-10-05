@@ -29,7 +29,7 @@ Hud::~Hud() {}
 void Hud::start_bg(sf::RenderWindow& w){
     s_starter.setPosition(w.getSize().x/2 - starter.getSize().x/2,w.getSize().y/2 - starter.getSize().y/2);
     highscore.setPosition(w.getSize().x - 1150,w.getSize().y - 450);
-    consigne.setPosition(w.getSize().x - 300,w.getSize().y - 430);
+    consigne.setPosition(w.getSize().x - 300,w.getSize().y - 440);
 
     int tmp=430;
     for(int i=0; i<5; i++)
