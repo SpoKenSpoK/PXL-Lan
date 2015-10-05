@@ -12,12 +12,8 @@ private:
     sf::Sprite s_starter;
     sf::Font fontText;
     sf::Text highscore;
+    sf::Text consigne;
     sf::Text tabname[5];
-    /*sf::Text name_1;
-    sf::Text name_2;
-    sf::Text name_3;
-    sf::Text name_4;
-    sf::Text name_5;*/
 
 public:
     //CONSTRUCTEUR & DESTRUCTEUR

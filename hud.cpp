@@ -7,21 +7,31 @@ Hud::Hud()
 
     fontText.loadFromFile("Agency FB Bold.ttf");
     highscore.setFont(fontText);
-    highscore.setString("Meilleurs Scores : ");
-    highscore.setCharacterSize(50);
+    highscore.setString("- 5 MEILLEURS SCORES -");
+    highscore.setCharacterSize(42);
+
+    consigne.setFont(fontText);
+    consigne.setString("G pour sauter.\nH pour s'accroupir.\n\nCourrer pour échapper\naux taureaux !\n\nAppuyez sur G pour\ncommencer la partie.\n\nBonne chance !");
+
 
     for(int i=0; i<5; ++i) { tabname[i].setFont(fontText); }
+    int tmp=42;
+    for(int i=0; i<5; ++i){
+        tmp-=3;
+        tabname[i].setCharacterSize(tmp);
+    }
     tabname[0].setColor(sf::Color::Yellow);
+
 }
 
 Hud::~Hud() {}
 
 void Hud::start_bg(sf::RenderWindow& w){
     s_starter.setPosition(w.getSize().x/2 - starter.getSize().x/2,w.getSize().y/2 - starter.getSize().y/2);
+    highscore.setPosition(w.getSize().x - 1150,w.getSize().y - 450);
+    consigne.setPosition(w.getSize().x - 300,w.getSize().y - 430);
 
-    highscore.setPosition(w.getSize().x - 1150,w.getSize().y - 470);
-
-    int tmp=450;
+    int tmp=430;
     for(int i=0; i<5; i++)
     {
         tmp-=50;
@@ -53,6 +63,7 @@ void Hud::start_bg(sf::RenderWindow& w){
 
     w.draw(s_starter);
     w.draw(highscore);
+    w.draw(consigne);
     for(int i=0; i<5; ++i){ w.draw(tabname[i]); }
 }
 
