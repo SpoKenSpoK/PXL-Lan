@@ -101,7 +101,7 @@ void Hud::gameover_bg(sf::RenderWindow& w, GameScore& g, bool& b){
             std::cout<<_pseudo<<std::endl;;
             std::transform(_pseudo.begin(), _pseudo.end(),_pseudo.begin(), ::toupper);
             KeyEntered.setString(_pseudo);
-            KeyEntered.setPosition(w.getSize().x/2 - 85,w.getSize().y/2);
+            KeyEntered.setPosition(w.getSize().x - 674 ,w.getSize().y - 230);
         }
     }
 
@@ -111,7 +111,9 @@ void Hud::gameover_bg(sf::RenderWindow& w, GameScore& g, bool& b){
         fichier.open("highscore.txt",std::ofstream::out | std::ofstream::app);
 
         if(fichier){
-        fichier <<"\n"<< _pseudo << " " << g.getCompt_i();
+
+        /// APPEL DE LA METHODE ECRITURE DANS UN FICHIER
+        //fichier <<"\n"<< _pseudo << " " << g.getCompt_i();
         fichier.close();
         }
         b = true;
