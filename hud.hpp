@@ -31,6 +31,7 @@ public:
     //APPEL DES DIFFERENTS BACKGROUND
     void start_bg(sf::RenderWindow&);
     void gameover_bg(sf::RenderWindow&, GameScore&,bool&);
+    void sauvegarder(std::string&, GameScore&);
     std::string intToString(int);
 };
 

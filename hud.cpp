@@ -107,21 +107,51 @@ void Hud::gameover_bg(sf::RenderWindow& w, GameScore& g, bool& b){
 
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Return))
     {
-        std::ofstream fichier;
-        fichier.open("highscore.txt",std::ofstream::out | std::ofstream::app);
-
-        if(fichier){
-
-        /// APPEL DE LA METHODE ECRITURE DANS UN FICHIER
-        //fichier <<"\n"<< _pseudo << " " << g.getCompt_i();
-        fichier.close();
-        }
+        sauvegarder(_pseudo,g);
+        //appel methode sauvegarde
         b = true;
     }
     w.draw(s_over);
     w.draw(TxtScoring);
     w.draw(KeyEntered);
 }
+
+void Hud::sauvegarder(std::string& p, GameScore& g){
+
+    int score[5];
+    std::string name[5];
+
+    /// LECTURE DU FICHIER
+    std::ifstream fichier("highscore.txt", std::ios::in);
+    if(fichier){
+        for(int i=0; i<5; ++i){ fichier >> name[i] >> score[i]; }
+
+        ///Debug
+        for(int i =0; i<5; ++i)
+            std::cout<<name[i]<<" "<<score[i]<<std::endl;
+
+        /// Faire le trie
+
+
+
+
+        ///Re-Debug
+        for(int i =0; i<5; ++i)
+            std::cout<<name[i]<<" "<<score[i]<<std::endl;
+
+        fichier.close();
+    }
+
+    /// ECRITURE DANS LE FICHIER
+    std::ofstream fichier_bis;
+    fichier_bis.open("highscore.txt",std::ofstream::out | std::ofstream::trunc);
+    if(fichier){
+        for(int i=0; i<5; ++i){ fichier_bis <<"\n"<< name[i] << " " << score[i]; }
+        fichier.close();
+    }
+
+}
+
 
 std::string Hud::intToString(int i){
     std::ostringstream oss;
