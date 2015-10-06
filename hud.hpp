@@ -5,7 +5,10 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <algorithm>
+#include <string>
 #include "gamescore.hpp"
+
 
 class Hud: public sf::Sprite{
 private:
@@ -16,7 +19,9 @@ private:
     sf::Font fontText;
     sf::Text highscore;
     sf::Text consigne;
+    sf::Text KeyEntered;
     sf::Text tabname[5];
+    std::string _pseudo;
 
 public:
     //CONSTRUCTEUR & DESTRUCTEUR

@@ -13,8 +13,11 @@ Hud::Hud()
     highscore.setString("- 5 MEILLEURS SCORES -");
     highscore.setCharacterSize(42);
 
+    KeyEntered.setFont(fontText);
+    KeyEntered.setCharacterSize(64);
+
     consigne.setFont(fontText);
-    consigne.setString("G pour sauter.\nH pour s'accroupir.\n\nCourrer pour échapper\naux taureaux !\n\nAppuyez sur G pour\ncommencer la partie.\n\nBonne chance !");
+    consigne.setString("G pour sauter.\nH pour s'accroupir.\n\nEvitez les taureaux!\n\nAppuyez sur G pour\ncommencer la partie.\n\nBonne chance !");
 
     for(int i=0; i<5; ++i) { tabname[i].setFont(fontText); }
     int tmp=42;
@@ -71,25 +74,52 @@ void Hud::start_bg(sf::RenderWindow& w){
 
 void Hud::gameover_bg(sf::RenderWindow& w, GameScore& g, bool& b){
     //GESTION ECRITURE DANS LE FICHIER
+    sf::Event event;
+    std::string scoring;
+    scoring += intToString(g.getCompt_i());
+
+    sf::Text TxtScoring(scoring,fontText);
+    TxtScoring.setCharacterSize(42);
+    TxtScoring.setColor(sf::Color::Yellow);
+    TxtScoring.setPosition(w.getSize().x/2 - 85,w.getSize().y/2 - 58);
+
+    while( w.pollEvent(event))
+    {
+        if (event.type == sf::Event::TextEntered)
+        {
+            if (event.text.unicode > 96 && event.text.unicode <123 && _pseudo.length()<4)
+            {
+                _pseudo += static_cast<char>(event.text.unicode);
+            }
+            else  if(event.key.code == 8 && _pseudo.length()>= 1){
+                std::string temp;
+                for(unsigned int i=0; i<_pseudo.length() - 1; ++i){
+                    temp+=_pseudo[i];
+                }
+                _pseudo = temp;
+             }
+            std::cout<<_pseudo<<std::endl;;
+            std::transform(_pseudo.begin(), _pseudo.end(),_pseudo.begin(), ::toupper);
+            KeyEntered.setString(_pseudo);
+            KeyEntered.setPosition(w.getSize().x/2 - 85,w.getSize().y/2);
+        }
+    }
+
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Return))
     {
         std::ofstream fichier;
         fichier.open("highscore.txt",std::ofstream::out | std::ofstream::app);
 
         if(fichier){
-        fichier<< g.getCompt_i();
+        fichier <<"\n"<< _pseudo << " " << g.getCompt_i();
         fichier.close();
         }
         b = true;
     }
-
     w.draw(s_over);
+    w.draw(TxtScoring);
+    w.draw(KeyEntered);
 }
-
-
-/*
-
- */
 
 std::string Hud::intToString(int i){
     std::ostringstream oss;
