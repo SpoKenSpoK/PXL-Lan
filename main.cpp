@@ -5,7 +5,7 @@
 #include <sstream>
 
 //INCLUDE:
-#include "perso.hpp"
+#include "player.hpp"
 #include "gamescore.hpp"
 #include "hud.hpp"
 
@@ -62,11 +62,12 @@ int main(){
             if(sf::Keyboard::isKeyPressed(sf::Keyboard::X)) dead=true;
 
             if(dead){
-                bool death_bg = true;
-                while(death_bg){
-                    game_started = false;
+                game_started = false;
+                bool name_right = false;
+
+                while(!name_right){
                     window.clear();
-                    death_bg=hud.gameover_bg(window);
+                    hud.gameover_bg(window,gamescore,name_right);
                     window.display();
                 }
                 gamescore.setCompt_f(0);

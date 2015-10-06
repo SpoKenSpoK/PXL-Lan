@@ -69,18 +69,27 @@ void Hud::start_bg(sf::RenderWindow& w){
     for(int i=0; i<5; ++i){ w.draw(tabname[i]); }
 }
 
-bool Hud::gameover_bg(sf::RenderWindow& w){
+void Hud::gameover_bg(sf::RenderWindow& w, GameScore& g, bool& b){
     //GESTION ECRITURE DANS LE FICHIER
-
-    bool name_right = false;
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Return))
-        name_right = false;
-    else
-        name_right = true;
+    {
+        std::ofstream fichier;
+        fichier.open("highscore.txt",std::ofstream::out | std::ofstream::app);
+
+        if(fichier){
+        fichier<< g.getCompt_i();
+        fichier.close();
+        }
+        b = true;
+    }
 
     w.draw(s_over);
-    return name_right;
 }
+
+
+/*
+
+ */
 
 std::string Hud::intToString(int i){
     std::ostringstream oss;

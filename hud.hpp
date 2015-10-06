@@ -5,6 +5,7 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include "gamescore.hpp"
 
 class Hud: public sf::Sprite{
 private:
@@ -24,7 +25,7 @@ public:
 
     //APPEL DES DIFFERENTS BACKGROUND
     void start_bg(sf::RenderWindow&);
-    bool gameover_bg(sf::RenderWindow&);
+    void gameover_bg(sf::RenderWindow&, GameScore&,bool&);
     std::string intToString(int);
 };
 

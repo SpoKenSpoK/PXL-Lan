@@ -1,4 +1,4 @@
-#include "perso.hpp"
+#include "player.hpp"
 
 //CONSTRUCTEUR & DESCTRUCTEUR:
 Player::Player()
@@ -22,5 +22,4 @@ void Player::slide()
 {
     this->setStatus(sliding);
     this->move(0,7);
-    std::cout<<"sliding"<<std::endl;
 }
