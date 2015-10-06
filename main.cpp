@@ -18,6 +18,7 @@ std::string intToString(int i) {
 
 //DEBUT DU MAIN
 sf::Texture player_texture;
+sf::Texture bg_texture;
 sf::Font fontScore;
 sf::Text score("", fontScore);
 
@@ -32,6 +33,11 @@ int main(){
     Player player;
     player.setTexture(player_texture);
     player.setPosition(window.getSize().x/2 - 32,window.getSize().y - 64);
+
+    bg_texture.loadFromFile("bin/img/background.png");
+    sf::Sprite bg;
+    bg.setTexture(bg_texture);
+
 
     GameScore gamescore;
     Hud hud;
@@ -114,6 +120,7 @@ int main(){
             score.setString(temp);
 
             window.clear();
+            window.draw(bg);
             window.draw(player);
             window.draw(score);
             window.display();
