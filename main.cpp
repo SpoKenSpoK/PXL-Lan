@@ -8,6 +8,7 @@
 #include "player.hpp"
 #include "gamescore.hpp"
 #include "hud.hpp"
+#include "bulls.hpp"
 
 //AVANT LE MAIN
 std::string intToString(int i) {
@@ -38,6 +39,19 @@ int main(){
     sf::Sprite bg;
     bg.setTexture(bg_texture);
 
+///creation des taureaux
+    Bulls* bulls;
+    Bulls::bull_count = 1200 / Bulls::bull_space;
+    bulls = new Bulls[Bulls::bull_count];
+    for(int i=0; i<Bulls::bull_count; ++i){
+        bulls[i].flying = rand()%2;
+        if(!bulls[i].flying)
+            bulls[i].setPosition(1201 + (i*Bulls::bull_space), 500 - bulls[i].getGlobalBounds().height);
+        if(bulls[i].flying)
+            bulls[i].setPosition(1201 + (i*Bulls::bull_space), 500 - bulls[i].getGlobalBounds().height - 100);
+    }
+    Bulls::last_bull = Bulls::bull_count - 1;
+///fin creation des taureaux
 
     GameScore gamescore;
     Hud hud;
@@ -103,7 +117,7 @@ int main(){
             if(slide==true){
                 jump=false;
                 player.setPosition(player.getPosition().x, window.getSize().y - 64);
-                std::cout<<"sliding"<<std::endl;
+                //std::cout<<"sliding"<<std::endl;
             }
 
             if(!jump && !slide) player.setStatus(running);
@@ -121,11 +135,16 @@ int main(){
 
             window.clear();
             window.draw(bg);
+            for(int i=0; i<Bulls::bull_count; ++i){
+                bulls[i].moving();
+                window.draw(bulls[i]);
+            }
             window.draw(player);
             window.draw(score);
             window.display();
         }
     }
+    delete bulls;
 
 return 0;
 }

@@ -1,6 +1,13 @@
 
 MARI 2233
+<<<<<<< Updated upstream
 JESU 1111
 CACA 786
 AAAA 268
 MARI 70
+=======
+X 653
+AAAA 268
+MARI 70
+JOSE 56
+>>>>>>> Stashed changes
