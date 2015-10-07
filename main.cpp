@@ -52,8 +52,8 @@ int main(){
                     window.close();
             }
             if(sf::Keyboard::isKeyPressed(sf::Keyboard::G)) game_started = true;
-            ///creation des taureaux
 
+            ///creation des taureaux
             if(!bulls_created){
                 Bulls::bull_count = 1200 / Bulls::bull_space;
                 bulls = new Bulls[Bulls::bull_count];
@@ -76,14 +76,8 @@ int main(){
             bool dead = false;
 
             ///GESTION DU CLAVIER & MOUVEMENT DU PERSO
-
-            //if(sf::Keyboard::isKeyPressed(sf::Keyboard::X)) dead=true;
-           /// JEU NE SE RESET PAS
-          for (int i=0;i<=Bulls::bull_count;++i)
-                if(bulls[i].getGlobalBounds().intersects(player.getGlobalBounds()))
-                {
-                    dead=true;
-                }
+            for (int i=0;i<=Bulls::bull_count;++i)
+                if(bulls[i].getGlobalBounds().intersects(player.getGlobalBounds())) dead=true;
 
             if(dead){
                 game_started = false;

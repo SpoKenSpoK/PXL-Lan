@@ -2,7 +2,7 @@
 
 //CONSTRUCTEUR & DESCTRUCTEUR:
 Player::Player()
-    :speed(2), status(running)
+    :speed(10), status(running)
 {}
 
 Player::~Player(){}
