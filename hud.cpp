@@ -116,7 +116,7 @@ void Hud::gameover_bg(sf::RenderWindow& w, GameScore& g, bool& b){
     w.draw(KeyEntered);
 }
 
-void Hud::sauvegarder(std::string& p, GameScore& g){
+void Hud::sauvegarder(std::string& pseudo, GameScore& g){
 
     int score[5];
     std::string name[5];
@@ -132,9 +132,36 @@ void Hud::sauvegarder(std::string& p, GameScore& g){
 
         /// Faire le trie
 
+        int index = 0;
+        bool index_ok_=true;
+        bool nulachier=false;
+        for(int i=0; i<5; ++i){
+            if(g.getCompt_i() >= score[i]){
+                if(index_ok_){
+                    index=i;
+                    std::cout<<"INDEX: "<<index<<std::endl;
+                    index_ok_=false;
+                    nulachier=false;
+                }
+            }
+            else nulachier = true;
+        }
 
-
-
+        if(!nulachier){
+            if(index == 4){
+                score[4]=g.getCompt_i();
+                name[4]=pseudo;
+            }
+            else{
+                for(int i=3; i>=index; i--)
+                {
+                    score[i+1]=score[i];
+                    name[i+1]=name[i];
+                }
+                score[index]= g.getCompt_i();
+                name[index]= pseudo;
+            }
+        }
         ///Re-Debug
         for(int i =0; i<5; ++i)
             std::cout<<name[i]<<" "<<score[i]<<std::endl;
@@ -144,14 +171,13 @@ void Hud::sauvegarder(std::string& p, GameScore& g){
 
     /// ECRITURE DANS LE FICHIER
     std::ofstream fichier_bis;
-    fichier_bis.open("highscore.txt",std::ofstream::out | std::ofstream::trunc);
-    if(fichier){
+    fichier_bis.open("highscore.txt",std::ofstream::out /*| std::ofstream::trunc*/);
+    if(fichier_bis){
         for(int i=0; i<5; ++i){ fichier_bis <<"\n"<< name[i] << " " << score[i]; }
-        fichier.close();
+        fichier_bis.close();
     }
 
 }
-
 
 std::string Hud::intToString(int i){
     std::ostringstream oss;
