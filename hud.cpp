@@ -1,24 +1,23 @@
 #include "hud.hpp"
 
-Hud::Hud()
-{
+Hud::Hud(){
+    ///Chargement Textures/Images & Text + Font
     starter.loadFromFile("tt.png");
-    s_starter.setTexture(starter);
-
     over.loadFromFile("tt_end.png");
+    s_starter.setTexture(starter);
     s_over.setTexture(over);
 
     fontText.loadFromFile("Agency FB Bold.ttf");
     highscore.setFont(fontText);
-    highscore.setString("- 5 MEILLEURS SCORES -");
-    highscore.setCharacterSize(42);
-
     KeyEntered.setFont(fontText);
+    consigne.setFont(fontText);
+
+    highscore.setString("- 5 MEILLEURS SCORES -");
+    consigne.setString("G pour sauter.\nH pour s'accroupir.\n\nEvitez les taureaux!\n\nAppuyez sur G pour\ncommencer la partie.\n\nBonne chance !");
+    highscore.setCharacterSize(42);
     KeyEntered.setCharacterSize(64);
 
-    consigne.setFont(fontText);
-    consigne.setString("G pour sauter.\nH pour s'accroupir.\n\nEvitez les taureaux!\n\nAppuyez sur G pour\ncommencer la partie.\n\nBonne chance !");
-
+    ///Affichage du tableau des scores
     for(int i=0; i<5; ++i) { tabname[i].setFont(fontText); }
     int tmp=42;
     for(int i=0; i<5; ++i){
@@ -26,7 +25,6 @@ Hud::Hud()
         tabname[i].setCharacterSize(tmp);
     }
     tabname[0].setColor(sf::Color::Yellow);
-
 }
 
 Hud::~Hud() {}
@@ -45,24 +43,17 @@ void Hud::start_bg(sf::RenderWindow& w){
 
     std::ifstream fichier("highscore.txt", std::ios::in); ///Ouverture du fichier en lecture
     if(fichier){
-
         int score[5];
         std::string name[5];
 
-        for(int i=0; i<5; ++i){
-            fichier >> name[i]
-                    >> score[i];
-        }
-
+        for(int i=0; i<5; ++i){ fichier >> name[i] >> score[i]; }
         for(int i=0; i<5; ++i){
             name[i]+= " : ";
             name[i]+= intToString(score[i]);
             tabname[i].setString(name[i]);
         }
-
         fichier.close();  /// Fermeture du fichier
     }
-
     else
         std::cerr << "Impossible d'ouvrir le fichier !" << std::endl;
 
@@ -73,7 +64,6 @@ void Hud::start_bg(sf::RenderWindow& w){
 }
 
 void Hud::gameover_bg(sf::RenderWindow& w, GameScore& g, bool& b){
-    //GESTION ECRITURE DANS LE FICHIER
     sf::Event event;
     std::string scoring;
     scoring += intToString(g.getCompt_i());
@@ -108,7 +98,6 @@ void Hud::gameover_bg(sf::RenderWindow& w, GameScore& g, bool& b){
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Return))
     {
         sauvegarder(_pseudo,g);
-        //appel methode sauvegarde
         b = true;
     }
     w.draw(s_over);
@@ -126,12 +115,7 @@ void Hud::sauvegarder(std::string& pseudo, GameScore& g){
     if(fichier){
         for(int i=0; i<5; ++i){ fichier >> name[i] >> score[i]; }
 
-        ///Debug
-        for(int i =0; i<5; ++i)
-            std::cout<<name[i]<<" "<<score[i]<<std::endl;
-
-        /// Faire le trie
-
+        /// GESTION TRI DES HIGHSCORES
         int index = 0;
         bool index_ok_=true;
         bool nulachier=false;
@@ -139,7 +123,6 @@ void Hud::sauvegarder(std::string& pseudo, GameScore& g){
             if(g.getCompt_i() >= score[i]){
                 if(index_ok_){
                     index=i;
-                    std::cout<<"INDEX: "<<index<<std::endl;
                     index_ok_=false;
                     nulachier=false;
                 }
@@ -162,14 +145,10 @@ void Hud::sauvegarder(std::string& pseudo, GameScore& g){
                 name[index]= pseudo;
             }
         }
-        ///Re-Debug
-        for(int i =0; i<5; ++i)
-            std::cout<<name[i]<<" "<<score[i]<<std::endl;
-
         fichier.close();
     }
 
-    /// ECRITURE DANS LE FICHIER
+    /// ECRITURE DANS LE FICHIER APRES TRI
     std::ofstream fichier_bis;
     fichier_bis.open("highscore.txt",std::ofstream::out /*| std::ofstream::trunc*/);
     if(fichier_bis){
