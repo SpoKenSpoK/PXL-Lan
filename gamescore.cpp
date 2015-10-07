@@ -17,7 +17,7 @@ void GameScore::setCompt_i(const int& i) { compt_i=i; }
 int GameScore::func(bool& game_started)
 {
     if(game_started){
-        setCompt_f(getCompt_f()+0.3);
+        setCompt_f(getCompt_f()+0.2);
         setCompt_i(getCompt_f());
         std::cout<<getCompt_i()<<std::endl;
         return getCompt_i();
