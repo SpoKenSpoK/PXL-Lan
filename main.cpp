@@ -10,13 +10,6 @@
 #include "hud.hpp"
 #include "bulls.hpp"
 
-//AVANT LE MAIN
-std::string intToString(int i) {
-     std::ostringstream oss;
-     oss << i;
-     return oss.str();
-}
-
 //DEBUT DU MAIN
 sf::Texture player_texture;
 sf::Texture bg_texture;
@@ -117,7 +110,6 @@ int main(){
             if(slide==true){
                 jump=false;
                 player.setPosition(player.getPosition().x, window.getSize().y - 64);
-                //std::cout<<"sliding"<<std::endl;
             }
 
             if(!jump && !slide) player.setStatus(running);
@@ -130,7 +122,7 @@ int main(){
             }
 
             std::string temp = "Score: ";
-            temp += intToString(gamescore.func(game_started));
+            temp += hud.intToString(gamescore.func(game_started));
             score.setString(temp);
 
             window.clear();
