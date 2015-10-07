@@ -79,11 +79,11 @@ int main(){
 
             //if(sf::Keyboard::isKeyPressed(sf::Keyboard::X)) dead=true;
            /// JEU NE SE RESET PAS
-            for (int i=0;i<=Bulls::bull_count;++i)
+          /*  for (int i=0;i<=Bulls::bull_count;++i)
                 if(bulls[i].getGlobalBounds().intersects(player.getGlobalBounds()))
                 {
                     dead=true;
-                }
+                } */
 
             if(dead){
                 game_started = false;
