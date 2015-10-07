@@ -16,6 +16,9 @@ sf::Texture bg_texture;
 sf::Font fontScore;
 sf::Text score("", fontScore);
 
+Bulls* bulls;
+bool bulls_created=false;
+
 bool game_started=false; ///booleen a vrai tant que le mec a pas perdu
 
 int main(){
@@ -31,20 +34,6 @@ int main(){
     bg_texture.loadFromFile("bin/img/background.png");
     sf::Sprite bg;
     bg.setTexture(bg_texture);
-
-///creation des taureaux
-    Bulls* bulls;
-    Bulls::bull_count = 1200 / Bulls::bull_space;
-    bulls = new Bulls[Bulls::bull_count];
-    for(int i=0; i<Bulls::bull_count; ++i){
-        bulls[i].flying = rand()%2;
-        if(!bulls[i].flying)
-            bulls[i].setPosition(1201 + (i*Bulls::bull_space), 500 - bulls[i].getGlobalBounds().height);
-        if(bulls[i].flying)
-            bulls[i].setPosition(1201 + (i*Bulls::bull_space), 500 - bulls[i].getGlobalBounds().height - 100);
-    }
-    Bulls::last_bull = Bulls::bull_count - 1;
-///fin creation des taureaux
 
     GameScore gamescore;
     Hud hud;
@@ -63,6 +52,22 @@ int main(){
                     window.close();
             }
             if(sf::Keyboard::isKeyPressed(sf::Keyboard::G)) game_started = true;
+            ///creation des taureaux
+
+            if(!bulls_created){
+                Bulls::bull_count = 1200 / Bulls::bull_space;
+                bulls = new Bulls[Bulls::bull_count];
+                for(int i=0; i<Bulls::bull_count; ++i){
+                    bulls[i].flying = rand()%2;
+                    if(!bulls[i].flying)
+                        bulls[i].setPosition(1201 + (i*Bulls::bull_space), 500 - bulls[i].getGlobalBounds().height);
+                    if(bulls[i].flying)
+                        bulls[i].setPosition(1201 + (i*Bulls::bull_space), 500 - bulls[i].getGlobalBounds().height - 100);
+                }
+                Bulls::last_bull = Bulls::bull_count - 1;
+                bulls_created=true;
+            }
+            ///fin creation des taureaux
         }
 
         if(game_started){
@@ -92,6 +97,10 @@ int main(){
                 }
                 gamescore.setCompt_f(0);
                 dead=false;
+                delete []bulls;
+                Bulls::bull_count=0;
+                Bulls::last_bull=0;
+                bulls_created=false;
             }
 
             if(sf::Keyboard::isKeyPressed(sf::Keyboard::G)){
@@ -143,7 +152,7 @@ int main(){
             window.display();
         }
     }
-    delete bulls;
-
+    if(bulls_created)
+        delete []bulls;
 return 0;
 }
