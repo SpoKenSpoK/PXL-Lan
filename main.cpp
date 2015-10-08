@@ -55,7 +55,7 @@ int main(){
 
             ///creation des taureaux
             if(!bulls_created){
-                Bulls::bull_count = 1200 / Bulls::bull_space;
+                Bulls::bull_count = (1200 / Bulls::bull_space) + 1;
                 bulls = new Bulls[Bulls::bull_count];
                 for(int i=0; i<Bulls::bull_count; ++i){
                     bulls[i].flying = rand()%2;

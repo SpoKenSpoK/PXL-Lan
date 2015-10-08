@@ -2,7 +2,7 @@
 #include <cstdlib>
 
 Bulls::Bulls()
-    :speed(5), flying(false)
+    :speed(3), flying(false)
 {
     bull_texture.loadFromFile("bin/img/t1.png");
     this->setTexture(bull_texture);
