@@ -95,7 +95,7 @@ void Hud::gameover_bg(sf::RenderWindow& w, GameScore& g, bool& b){
         }
     }
 
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Return))
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Return) && _pseudo.length()>0)
     {
         sauvegarder(_pseudo,g);
         b = true;
