@@ -29,6 +29,8 @@ Hud::Hud(){
 
 Hud::~Hud() {}
 
+void Hud::setPseudo(const std::string& p){ _pseudo = p; }
+
 void Hud::start_bg(sf::RenderWindow& w){
     s_starter.setPosition(w.getSize().x/2 - starter.getSize().x/2,w.getSize().y/2 - starter.getSize().y/2);
     highscore.setPosition(w.getSize().x - 1150,w.getSize().y - 450);
@@ -99,7 +101,6 @@ void Hud::gameover_bg(sf::RenderWindow& w, GameScore& g, bool& b){
     {
         sauvegarder(_pseudo,g);
         b = true;
-        _pseudo = "AAAA";
     }
     w.draw(s_over);
     w.draw(TxtScoring);

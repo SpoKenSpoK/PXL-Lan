@@ -28,6 +28,8 @@ public:
     Hud();
     ~Hud();
 
+    void setPseudo(const std::string&);
+
     //APPEL DES DIFFERENTS BACKGROUND
     void start_bg(sf::RenderWindow&);
     void gameover_bg(sf::RenderWindow&, GameScore&,bool&);
