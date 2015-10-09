@@ -99,6 +99,7 @@ void Hud::gameover_bg(sf::RenderWindow& w, GameScore& g, bool& b){
     {
         sauvegarder(_pseudo,g);
         b = true;
+        _pseudo = "AAAA";
     }
     w.draw(s_over);
     w.draw(TxtScoring);
