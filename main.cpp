@@ -109,7 +109,7 @@ int main(){
             }
 
             if(player.getPosition().y < window.getSize().y - 64 && !jump){ /// si il est en l'air mais qu'il saute pas il retombe
-                player.move(0,5);
+                player.move(0,3);
             }
 
             if(player.getPosition().y <= window.getSize().y - 150){ jump = false; jump_finished=true;}///faire retomber le perso quand il est en haut
