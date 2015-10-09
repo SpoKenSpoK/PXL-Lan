@@ -16,10 +16,8 @@ void Player::jump()
 {
     this->setStatus(jumping);
     this->move(0,-5);
-    //std::cout<<"jumping"<<std::endl;
 }
 void Player::slide()
 {
     this->setStatus(sliding);
-    this->move(0,7);
 }

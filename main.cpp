@@ -38,6 +38,8 @@ int main(){
     GameScore gamescore;
     Hud hud;
 
+    bool jump_finished = false;
+
     while (window.isOpen())
     {
         if(!game_started){
@@ -60,9 +62,9 @@ int main(){
                 for(int i=0; i<Bulls::bull_count; ++i){
                     bulls[i].flying = rand()%2;
                     if(!bulls[i].flying)
-                        bulls[i].setPosition(1201 + (i*Bulls::bull_space), 500 - bulls[i].getGlobalBounds().height);
+                        bulls[i].setPosition(1201 + (i*Bulls::bull_space) + rand()%100, 500 - bulls[i].getGlobalBounds().height);
                     if(bulls[i].flying)
-                        bulls[i].setPosition(1201 + (i*Bulls::bull_space), 500 - bulls[i].getGlobalBounds().height - 100);
+                        bulls[i].setPosition(1201 + (i*Bulls::bull_space) + rand()%100, 500 - bulls[i].getGlobalBounds().height - 100);
                 }
                 Bulls::last_bull = Bulls::bull_count - 1;
                 bulls_created=true;
@@ -95,39 +97,43 @@ int main(){
                 Bulls::last_bull=0;
                 bulls_created=false;
             }
-
-            if(sf::Keyboard::isKeyPressed(sf::Keyboard::G)){
+            if(sf::Keyboard::isKeyPressed(sf::Keyboard::G) && !jump_finished){ ///faire sauter le perso
                 jump=true;
                 slide=false;
                 player.jump();
             }
-            if(sf::Keyboard::isKeyPressed(sf::Keyboard::H)){
+            if(sf::Keyboard::isKeyPressed(sf::Keyboard::H)){ ///faire glisser le perso
                 slide=true;
                 jump=false;
                 player.slide();
             }
 
-            if(jump==true && player.getPosition().y > window.getSize().y - 150){
-                slide=false;
-            }
-
-            else if(player.getPosition().y < window.getSize().y - 64){
+            if(player.getPosition().y < window.getSize().y - 64 && !jump){ /// si il est en l'air mais qu'il saute pas il retombe
                 player.move(0,5);
-                jump=false;
             }
 
-            if(slide==true){
+            if(player.getPosition().y <= window.getSize().y - 150){ jump = false; jump_finished=true;}///faire retomber le perso quand il est en haut
+
+
+
+            if(slide==true){ /// le faire glisser
                 jump=false;
                 player.setPosition(player.getPosition().x, window.getSize().y - 64);
             }
 
-            if(!jump && !slide) player.setStatus(running);
+            if(player.getPosition().y >= window.getSize().y - player.getGlobalBounds().height){ jump_finished=false; jump=false; player.setPosition(player.getPosition().x, window.getSize().y - player.getGlobalBounds().height);} /// quand il etait en train de retomber et qu'il a touché le bas
+
+            if(!jump && !slide) player.setStatus(running); ///si il saute pas et glisse pas il courre
 
             sf::Event event;
             while (window.pollEvent(event))
             {
                 if (event.type == sf::Event::Closed)
                     window.close();
+                if(event.type == sf::Event::KeyReleased && player.getPosition().y>0){
+                    jump_finished=true;
+                    jump=false;
+                }
             }
 
             std::string temp = "Score: ";
