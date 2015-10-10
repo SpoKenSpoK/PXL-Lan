@@ -15,7 +15,7 @@ void Player::setStatus(const Status& _status) { status=_status; }
 void Player::jump()
 {
     this->setStatus(jumping);
-    this->move(0,-3);
+    this->move(0,-5);
 }
 void Player::slide()
 {

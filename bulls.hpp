@@ -7,8 +7,10 @@
 class Bulls : public sf::Sprite{
 private:
     int speed;
-    sf::Texture bull_texture;
+    int Ianimation;
 public:
+    sf::Texture bull_texture;
+    sf::Texture bull_flying_texture;
     bool flying;
     static int bull_space; ///espace entre les taureaux
     static int last_bull; ///index du dernier taureau affiché sur l'ecran
@@ -16,6 +18,7 @@ public:
     Bulls();
     ~Bulls();
     void moving();
+    void animation();
 };
 
 #endif
