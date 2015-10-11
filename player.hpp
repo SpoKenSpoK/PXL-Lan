@@ -15,6 +15,9 @@ public:
     //CONSTRUCTEUR & DESTRUCTEUR
     Player();
     ~Player();
+    sf::Texture texture_run;
+    sf::Texture texture_jump;
+    sf::Texture texture_slide;
 
     // GETTER & SETTER:
     int getSpeed() const;
@@ -23,6 +26,7 @@ public:
     void setStatus(const Status&);
     void jump();
     void slide();
+    void animation();
 };
 
 #endif // PLAYER_HPP

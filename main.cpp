@@ -11,7 +11,6 @@
 #include "bulls.hpp"
 
 //DEBUT DU MAIN
-sf::Texture player_texture;
 sf::Texture bg_texture;
 sf::Font fontScore;
 sf::Text score("", fontScore);
@@ -26,9 +25,8 @@ int main(){
     sf::RenderWindow window(sf::VideoMode(1200,500), "PXL-Lan PROJECT: LineRunner - 2015");
     window.setFramerateLimit(120);
 
-    player_texture.loadFromFile("bin/img/sprite.png");
+
     Player player;
-    player.setTexture(player_texture);
     player.setPosition(window.getSize().x/2 - 32,window.getSize().y - 64);
 
     bg_texture.loadFromFile("bin/img/background.png");
@@ -148,6 +146,8 @@ int main(){
             std::string temp = "Score: ";
             temp += hud.intToString(gamescore.func(game_started));
             score.setString(temp);
+
+            player.animation();
 
             window.clear();
             window.draw(bg);

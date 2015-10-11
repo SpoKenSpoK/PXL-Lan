@@ -3,7 +3,13 @@
 //CONSTRUCTEUR & DESCTRUCTEUR:
 Player::Player()
     :speed(10), status(running)
-{}
+{
+    texture_run.loadFromFile("bin/img/linerunning.png");
+    texture_jump.loadFromFile("bin/img/jump.png");
+    texture_slide.loadFromFile("bin/img/slide.png");
+
+    this->setTexture(texture_run);
+}
 
 Player::~Player(){}
 
@@ -20,4 +26,17 @@ void Player::jump()
 void Player::slide()
 {
     this->setStatus(sliding);
+}
+
+void Player::animation(){
+    if(status == running){
+        this->setTexture(texture_run);
+        this->setTextureRect(sf::IntRect(0,0,75,98));
+    }
+    if(status == jumping){
+        this->setTexture(texture_jump);
+    }
+    if(status == sliding){
+        this->setTexture(texture_slide);
+    }
 }
