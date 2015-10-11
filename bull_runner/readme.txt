@@ -1,0 +1,1 @@
+le launcher.bat sert de raccourci, mais il ne doit pas etre déplacé, sinon l'executable du jeu s'appelle projet.exe et se trouve dans le dossier bin.
