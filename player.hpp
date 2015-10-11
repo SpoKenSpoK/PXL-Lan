@@ -10,6 +10,7 @@ class Player: public sf::Sprite{
 private:
     int speed; //Vitesse du personnage
     Status status; //Status du perso: Sauter - Se baisser - Courrir
+    int Ianimation;
 
 public:
     //CONSTRUCTEUR & DESTRUCTEUR
@@ -26,7 +27,7 @@ public:
     void setStatus(const Status&);
     void jump();
     void slide();
-    void animation();
+    void animation(int);
 };
 
 #endif // PLAYER_HPP

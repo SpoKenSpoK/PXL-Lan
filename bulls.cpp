@@ -26,7 +26,7 @@ void Bulls::moving(){
         if(this->flying){
             this->setTexture(bull_flying_texture);
             this->setTextureRect(sf::IntRect(0,0,89,52));
-            this->setPosition((bull_count)*(bull_space+this->getGlobalBounds().width) - rand()%100, 500 - this->getGlobalBounds().height - 50);
+            this->setPosition((bull_count)*(bull_space+this->getGlobalBounds().width) - rand()%100, 500 - this->getGlobalBounds().height - 75);
         }
     }
 }

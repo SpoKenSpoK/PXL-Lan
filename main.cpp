@@ -36,7 +36,8 @@ int main(){
     GameScore gamescore;
     Hud hud;
 
-    int m_animation = 0;
+    int b_animation = 0;
+    int p_animation = 0;
 
     bool jump_finished = false;
 
@@ -69,7 +70,7 @@ int main(){
                     if(bulls[i].flying){
                         bulls[i].setTexture(bulls[i].bull_flying_texture);
                         bulls[i].setTextureRect(sf::IntRect(0,0,89,52));
-                        bulls[i].setPosition(1201 + i*300 - rand()%100, 500 - bulls[i].getGlobalBounds().height - 50);
+                        bulls[i].setPosition(1201 + i*300 - rand()%100, 500 - bulls[i].getGlobalBounds().height - 75);
                     }
                 }
                 Bulls::last_bull = Bulls::bull_count - 1;
@@ -79,7 +80,8 @@ int main(){
         }
                         //bulls[i].setPosition(1201 + (i*Bulls::bull_space) + rand()%100, 500 - bulls[i].getGlobalBounds().height - 100);
         if(game_started){
-            m_animation++;
+            p_animation++;
+            b_animation++;
             bool jump = false;
             bool slide = false;
             bool dead = false;
@@ -121,7 +123,7 @@ int main(){
                 player.move(0,5);
             }
 
-            if(player.getPosition().y <= window.getSize().y - 250){ jump = false; jump_finished=true;}///faire retomber le perso quand il est en haut
+            if(player.getPosition().y <= window.getSize().y - 350){ jump = false; jump_finished=true;}///faire retomber le perso quand il est en haut
 
             if(slide==true){ /// le faire glisser
                 jump=false;
@@ -147,13 +149,13 @@ int main(){
             temp += hud.intToString(gamescore.func(game_started));
             score.setString(temp);
 
-            player.animation();
+            player.animation(p_animation);
 
             window.clear();
             window.draw(bg);
             for(int i=0; i<Bulls::bull_count; ++i){
                 bulls[i].moving();
-                if(m_animation>=10){
+                if(b_animation>=10){
                     bulls[i].animation();
                 }
                 window.draw(bulls[i]);
@@ -161,7 +163,8 @@ int main(){
             window.draw(player);
             window.draw(score);
             window.display();
-            if(m_animation>=10) m_animation = 0;
+            if(b_animation>=10) b_animation = 0;
+            if(p_animation>=7) p_animation = 0;
         }
     }
     if(bulls_created)
