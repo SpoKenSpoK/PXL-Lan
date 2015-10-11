@@ -59,19 +59,19 @@ int main(){
 
             ///creation des taureaux
             if(!bulls_created){
-                Bulls::bull_count = (1200 / Bulls::bull_space) + 1;
+                Bulls::bull_count = (1200 / (Bulls::bull_space)) + 1;
                 bulls = new Bulls[Bulls::bull_count];
                 for(int i=0; i<Bulls::bull_count; ++i){
                     bulls[i].flying = rand()%2;
                     if(!bulls[i].flying){
                         bulls[i].setTexture(bulls[i].bull_texture);
-                        bulls[i].setTextureRect(sf::IntRect(0,0,114,64));
-                        bulls[i].setPosition(1201 + i*300, 500 - bulls[i].getGlobalBounds().height);
+                        bulls[i].setTextureRect(sf::IntRect(0,0,89,50));
+                        bulls[i].setPosition(1201 + i*300 - rand()%100, 500 - bulls[i].getGlobalBounds().height);
                     }
                     if(bulls[i].flying){
                         bulls[i].setTexture(bulls[i].bull_flying_texture);
-                        bulls[i].setTextureRect(sf::IntRect(0,0,114,67));
-                        bulls[i].setPosition(1201 + i*300, 500 - bulls[i].getGlobalBounds().height - 50);
+                        bulls[i].setTextureRect(sf::IntRect(0,0,89,52));
+                        bulls[i].setPosition(1201 + i*300 - rand()%100, 500 - bulls[i].getGlobalBounds().height - 50);
                     }
                 }
                 Bulls::last_bull = Bulls::bull_count - 1;
@@ -101,14 +101,13 @@ int main(){
             }
 
             for (int i=0;i<=Bulls::bull_count;++i)
-                if(bulls[i].getGlobalBounds().intersects(player.getGlobalBounds())){
+                if(bulls[i].getGlobalBounds().intersects(player.getGlobalBounds()))
                         if(!(slide&bulls[i].flying)) dead=true;
-                }
             if(dead){
                 game_started = false;
                 bool name_right = false;
 
-                while(!name_right){
+                while(!name_right && window.isOpen()){
                     window.clear();
                     hud.gameover_bg(window,gamescore,name_right);
                     window.display();

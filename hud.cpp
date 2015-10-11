@@ -77,6 +77,8 @@ void Hud::gameover_bg(sf::RenderWindow& w, GameScore& g, bool& b){
 
     while( w.pollEvent(event))
     {
+        if (event.type == sf::Event::Closed)
+            w.close();
         if (event.type == sf::Event::TextEntered)
         {
             if (event.text.unicode > 96 && event.text.unicode <123 && _pseudo.length()<4)
@@ -90,7 +92,6 @@ void Hud::gameover_bg(sf::RenderWindow& w, GameScore& g, bool& b){
                 }
                 _pseudo = temp;
              }
-            std::cout<<_pseudo<<std::endl;;
             std::transform(_pseudo.begin(), _pseudo.end(),_pseudo.begin(), ::toupper);
             KeyEntered.setString(_pseudo);
             KeyEntered.setPosition(w.getSize().x - 674 ,w.getSize().y - 230);

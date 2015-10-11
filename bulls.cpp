@@ -20,13 +20,13 @@ void Bulls::moving(){
         this->flying = rand()%2;
         if(!this->flying){
             this->setTexture(bull_texture);
-            this->setTextureRect(sf::IntRect(0,0,114,64));
-            this->setPosition((bull_count)*(bull_space+this->getGlobalBounds().width), 500 - this->getGlobalBounds().height);
+            this->setTextureRect(sf::IntRect(0,0,89,50));
+            this->setPosition((bull_count)*(bull_space+this->getGlobalBounds().width) - rand()%100, 500 - this->getGlobalBounds().height);
         }
         if(this->flying){
             this->setTexture(bull_flying_texture);
-            this->setTextureRect(sf::IntRect(0,0,114,67));
-            this->setPosition((bull_count)*(bull_space+this->getGlobalBounds().width), 500 - this->getGlobalBounds().height - 50);
+            this->setTextureRect(sf::IntRect(0,0,89,52));
+            this->setPosition((bull_count)*(bull_space+this->getGlobalBounds().width) - rand()%100, 500 - this->getGlobalBounds().height - 50);
         }
     }
 }
@@ -34,7 +34,7 @@ void Bulls::moving(){
 void Bulls::animation(){
     Ianimation = ((Ianimation+1)%4);
     if(this->flying)
-        this->setTextureRect(sf::IntRect(Ianimation*114,0,114,67));
+        this->setTextureRect(sf::IntRect(Ianimation*89,0,89,52));
     if(!this->flying)
-        this->setTextureRect(sf::IntRect(Ianimation*114,0,114,64));
+        this->setTextureRect(sf::IntRect(Ianimation*89,0,89,50));
 }
